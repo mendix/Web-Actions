@@ -5,16 +5,24 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // - the code between BEGIN EXTRA CODE and END EXTRA CODE
 // Other code you write will be lost the next time you deploy the project.
+// BEGIN EXTRA CODE
+// END EXTRA CODE
 /**
- * Move the keyboard focus to the next element that can be focused.
- * @returns {Promise.<void>}
+ * @param {string} key
+ * @param {string} value
+ * @returns {Promise.<boolean>}
  */
-async function FocusNext() {
+async function SetCookie(key, value) {
     // BEGIN USER CODE
-    const { focusNext } = require("./FocusHelper");
-    focusNext();
-    return Promise.resolve();
+    try {
+        document.cookie = key + "=" + value + ";";
+        return true;
+    }
+    catch (e) {
+        console.error(e);
+        return false;
+    }
     // END USER CODE
 }
 
-export { FocusNext };
+export { SetCookie };
