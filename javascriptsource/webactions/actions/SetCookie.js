@@ -10,17 +10,15 @@
 /**
  * @param {string} key
  * @param {string} value
- * @returns {Promise.<boolean>}
+ * @returns {Promise.<void>}
  */
 async function SetCookie(key, value) {
     // BEGIN USER CODE
     try {
         document.cookie = key + "=" + value + ";";
-        return true;
     }
     catch (e) {
         console.error(e);
-        return false;
     }
     // END USER CODE
 }
