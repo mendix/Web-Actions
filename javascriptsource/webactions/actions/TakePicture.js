@@ -87,18 +87,18 @@ export async function TakePicture(picture, showConfirmationScreen, pictureQualit
         actionControl.addEventListener("click", () => {
 
              if(!videoIsReady){
+                actionControl.disabled = true;
                 // reload video if not ready yet (some devices need this extra step)
                 if(retryAttempt < 3){
                     retryAttempt++;
                 } else {
-                    actionControl.disabled = true;
                     mx.ui.error(getUserText("Media not available.", "Media niet beschikbaar."));
                     return;
                 }
                 video.load();
                 setTimeout(() => {
                     actionControl.click();
-                },50);
+                }, 50);
                 return;
             }
 
@@ -120,6 +120,8 @@ export async function TakePicture(picture, showConfirmationScreen, pictureQualit
                     closeControlHandler();
                 });
             }
+
+            actionControl.disabled = false;
         });
         video.addEventListener("loadedmetadata", () => (videoIsReady = true));
         function getVideoCanvas() {
